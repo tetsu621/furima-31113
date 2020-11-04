@@ -28,7 +28,7 @@
 | delivery_fee_id | integer    | null: false       |
 | area_id         | integer    | null: false       |
 | days_id         | integer    | null: false       |
-| price           | text       | null: false       |
+| price           | integer       | null: false       |
 | user            | references | foreign_key: true |
 
 ### Association
@@ -38,10 +38,10 @@
 
 ## purchasesテーブル
 
-| Column           | Type       | Options           |
-| ---------------- | ---------- | ----------------- |
-| user             | references | foreign_key: true |
-| products         | references | foreign_key: true |
+| Column  | Type       | Options           |
+| ------- | ---------- | ----------------- |
+| user    | references | foreign_key: true |
+| product | references | foreign_key: true |
 
 ### Association
 - belongs_to :user
