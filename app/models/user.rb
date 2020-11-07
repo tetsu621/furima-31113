@@ -11,10 +11,8 @@ class User < ApplicationRecord
   validates :last_name_kana, presence: true
   end
   validates :birthday, presence: true
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])[a-z\d]{8,32}+\z/i
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])\w{6,12}\z/i
   validates :password, presence: true, length: { minimum: 6}, format: { with: VALID_PASSWORD_REGEX}
-  VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/
-  validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}
   has_many :products
   has_many :purchases
 end
