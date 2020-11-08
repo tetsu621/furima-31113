@@ -3,16 +3,30 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :nickname, presence: true
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' } do
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :first_name_kana, presence: true
-  validates :last_name_kana, presence: true
+
+  with_options presence: true do
+    validates :nickname
+    validates :first_name
+    validates :last_name
+    validates :first_name_kana
+    validates :last_name_kana
+    validates :birthday
   end
-  validates :birthday, presence: true
+
+  with_options format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' } do
+    validates :first_name
+    validates :last_name
+    validates :first_name_kana
+    validates :last_name_kana
+  end
+  with_options format: { with: /[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+/, message: '全角カタカナを使用してください' } do
+    validates :first_name_kana
+    validates :last_name_kana
+  end
+
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])\w{6,12}\z/i
   validates :password, presence: true, length: { minimum: 6}, format: { with: VALID_PASSWORD_REGEX}
+  
   has_many :products
   has_many :purchases
 end
