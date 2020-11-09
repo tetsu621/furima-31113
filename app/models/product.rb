@@ -8,12 +8,16 @@ class Product < ApplicationRecord
   validates :status_id, presence: true
   validates :delivery_fee_id, presence: true
   validates :area_id, presence: true
-  validates :days_id, presence: true
+  validates :day_id, presence: true
   validates :price, presence: true
   validates :image, presence: true
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :genre
-
-  validates :genre_id, numericality: { other_than: 1 } 
+  belongs_to :category
+  belongs_to :status
+  belongs_to :delivery_fee
+  belongs_to :area
+  belongs_to :days
+  
+  validates :category_id, :status_id, :delivery_fee_id, :area_id, :day_id, numericality: { other_than: 1 } 
 end

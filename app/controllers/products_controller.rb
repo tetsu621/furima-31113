@@ -7,14 +7,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    def create
-      @product = Prototype.new(product_params)
-      @product.save
-      if @product.save
+    @product = Product.new(product_params)
+    @product.save
+    if @product.save
         redirect_to root_path
-      else
-         render :new
-      end
+    else
+        render :new
     end  
   end
 
@@ -22,6 +20,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:message).permit(:title, :explanation, :price, :image).merge(user_id: current_user.id)
+    params.require(:message).permit(:title, :explanation, :price, :image, :category_id, :status_id, :delivery_fee_id, :area_id, :day_id).merge(user_id: current_user.id)
   end
 end
