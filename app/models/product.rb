@@ -11,4 +11,9 @@ class Product < ApplicationRecord
   validates :days_id, presence: true
   validates :price, presence: true
   validates :image, presence: true
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :genre
+
+  validates :genre_id, numericality: { other_than: 1 } 
 end
