@@ -17,7 +17,7 @@ class Product < ApplicationRecord
   belongs_to :status
   belongs_to :delivery_fee
   belongs_to :area
-  belongs_to :days
+  belongs_to :day
   
   validates :category_id, :status_id, :delivery_fee_id, :area_id, :day_id, numericality: { other_than: 1 } 
 end
