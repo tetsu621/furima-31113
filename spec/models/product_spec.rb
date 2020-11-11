@@ -78,5 +78,35 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to include("Price is not included in the list")
     end
 
+    it "category_idが1だと登録ができない" do
+      @product.category_id = 1
+      @product.valid?
+      expect(@product.errors.full_messages).to include("Category must be other than 1")
+    end
+
+    it "status_idが1だと登録ができない" do
+      @product.status_id = 1
+      @product.valid?
+      expect(@product.errors.full_messages).to include("Status must be other than 1")
+    end
+
+    it "delivery_fee_idが1だと登録ができない" do
+      @product.delivery_fee_id = 1
+      @product.valid?
+      expect(@product.errors.full_messages).to include("Delivery fee must be other than 1")
+    end
+
+    it "area_idが1だと登録ができない" do
+      @product.area_id = 1
+      @product.valid?
+      expect(@product.errors.full_messages).to include("Area must be other than 1")
+    end
+
+    it "day_idが1だと登録ができない" do
+      @product.day_id = 1
+      @product.valid?
+      expect(@product.errors.full_messages).to include("Day must be other than 1")
+    end
+
   end
 end
