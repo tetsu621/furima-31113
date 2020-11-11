@@ -6,22 +6,30 @@ RSpec.describe Product, type: :model do
       @product = FactoryBot.build(:product)
     end
 
-       it "imageが空だと登録ができない" do
-        @product.image = nil
-        @product.valid?
-        expect(@product.errors.full_messages).to include("Image can't be blank")
-       end
+    describe '商品出品' do
+      context '新規登録がうまくいくとき' do
+        it "全てを満たしている場合は出品できる" do
+          expect(@product).to be_valid
+        end
+      end
 
-       it "titleが空だと登録ができない" do
-        @product.title = ""
-        @product.valid?
-        expect(@product.errors.full_messages).to include("Title can't be blank")
-       end
+      context '新規登録がうまくいかないとき' do
+        it "imageが空だと登録ができない" do
+          @product.image = nil
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Image can't be blank")
+        end
 
-       it "explanationが空だと登録ができない" do
-         @product.explanation = ""
-         @product.valid?
-         expect(@product.errors.full_messages).to include("Explanation can't be blank")
+        it "titleが空だと登録ができない" do
+          @product.title = ""
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Title can't be blank")
+        end
+
+        it "explanationが空だと登録ができない" do
+          @product.explanation = ""
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Explanation can't be blank")
         end
 
         it "category_idが空だと登録ができない" do
@@ -105,8 +113,9 @@ RSpec.describe Product, type: :model do
         it "day_idが1だと登録ができない" do
           @product.day_id = 1
           @product.valid?
-        expect(@product.errors.full_messages).to include("Day must be other than 1")
+          expect(@product.errors.full_messages).to include("Day must be other than 1")
         end
-     
+      end
+    end
   end
 end
