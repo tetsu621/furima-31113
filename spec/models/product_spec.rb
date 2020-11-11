@@ -61,19 +61,19 @@ RSpec.describe Product, type: :model do
     end
 
     it "priceが半角数字出ないと登録ができない" do
-      @product.price = "１２３４５"
+      @product.price = １２３４５
       @product.valid?
       expect(@product.errors.full_messages).to include("Price 半角数字を使用してください")
     end
     
     it "priceが300以下だと登録ができない" do
-      @product.price = "299"
+      @product.price = 299
       @product.valid?
       expect(@product.errors.full_messages).to include("Price is not included in the list")
     end
 
     it "priceが9999999以上だと登録ができない" do
-      @product.price = "10000000"
+      @product.price = 10000000
       @product.valid?
       expect(@product.errors.full_messages).to include("Price is not included in the list")
     end
