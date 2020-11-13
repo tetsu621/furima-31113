@@ -37,7 +37,7 @@
 - has_one :purchase
 
 
-## purchasesテーブル
+## ordersテーブル
 
 | Column  | Type       | Options           |
 | ------- | ---------- | ----------------- |

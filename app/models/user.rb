@@ -28,5 +28,5 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6}, format: { with: VALID_PASSWORD_REGEX}
   
   has_many :products
-  has_many :purchases
+  has_many :order
 end
