@@ -1,16 +1,17 @@
 class OrdersController < ApplicationController
   def index
     @product = Product.find(params[:product_id])
+    @order_address = OrderAddress.new
   end
 
   def create
     @order_address = OrderAddress.new(order_params)
-    if @oreder_address.valid
-      pay_product
+    if @order_address.valid?
+      #pay_product
       @order_address.save
       redirect_to root_path
     else
-     @product = prodoct.find(params[:product_id])
+     @product = Product.find(params[:product_id])
      render action: :index
     end 
   end
@@ -18,7 +19,8 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order_address).permit(:postal_code, :area_id, :municipality, :address, :building_name, :phone_number).merge(product_id: params[product_id])
+      params.require(:order_address).permit(:postal_code, :area_id, :municipality, :address, :building_name, :phone_number)
+      .merge(user_id: current_user.id, product_id: params[:product_id], token: params[:card_token])
     end
 
 end
