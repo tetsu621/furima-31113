@@ -3,9 +3,12 @@ class Address < ApplicationRecord
 
   with_options presence: true do
    validates :postal_code
-   validates :prefectures_id
+   validates :area_id
    validates :municipality
    validates :address
    validates :phone_number
   end 
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :area
 end
