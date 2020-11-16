@@ -24,9 +24,11 @@ class User < ApplicationRecord
     validates :last_name_kana
   end
 
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])\w{6,12}\z/i
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates :password, presence: true, length: { minimum: 6}, format: { with: VALID_PASSWORD_REGEX}
   
+
+
   has_many :products
   has_many :order
 end

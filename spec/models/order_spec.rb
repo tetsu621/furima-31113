@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   before do
+    
     @order = FactoryBot.build(:order)
   end
 
@@ -20,5 +21,13 @@ RSpec.describe Order, type: :model do
     @order.valid?
     expect(@order.errors.full_messages).to include("Token can't be blank")
   end
+
+  it "郵便番号が空だと登録ができない" do
+    @product.postal_code = ""
+    @product.valid?
+    expect(@product.errors.full_messages).to include("Postal code can't be blank")
+  end
+
+  
 end
 
