@@ -74,4 +74,8 @@ RSpec.describe OrderAddress, type: :model do
     expect(@order_address.errors.full_messages).to include("Area must be other than 1")
   end
 
+  it "建物名が空でも購入ができること" do
+    @order_address.building_name = nil
+    expect(@order_address).to be_valid
+  end
 end
