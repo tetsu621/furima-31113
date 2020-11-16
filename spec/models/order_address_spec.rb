@@ -68,4 +68,10 @@ RSpec.describe OrderAddress, type: :model do
     expect(@order_address.errors.full_messages).to include("Phone number is invalid")
   end
 
+  it "area_idが1だと登録ができない" do
+    @order_address.area_id = 1
+    @order_address.valid?
+    expect(@order_address.errors.full_messages).to include("Area must be other than 1")
+  end
+
 end
