@@ -9,73 +9,78 @@ RSpec.describe OrderAddress, type: :model do
     sleep 1
   end
 
-  it "priceとtokenがあれば保存ができること" do
-    expect(@order_address).to be_valid
-  end
+  describe '商品出品' do
+    context '新規登録がうまくいくとき' do
+      it "priceとtokenがあれば保存ができること" do
+        expect(@order_address).to be_valid
+      end
 
+      it "建物名が空でも購入ができること" do
+        @order_address.building_name = nil
+        expect(@order_address).to be_valid
+      end
+    end
 
-  it "tokenが空では登録できないこと" do
-    @order_address.token = nil
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Token can't be blank")
-  end
+    context '新規登録がうまくいくいかないとき' do
+      it "tokenが空では登録できないこと" do
+        @order_address.token = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
 
-  it '郵便番号が空だと保存できないこと' do
-    @order_address.postal_code = nil
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Postal code can't be blank")
-  end
+      it '郵便番号が空だと保存できないこと' do
+        @order_address.postal_code = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Postal code can't be blank")
+      end
 
-  it '都道府県が空だと保存できないこと' do
-    @order_address.area_id = nil
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Area is not a number")
-  end
+      it '都道府県が空だと保存できないこと' do
+        @order_address.area_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Area is not a number")
+      end
 
-  it '市区町村が空だと保存できないこと' do
-    @order_address.municipality = nil
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Municipality can't be blank")
-  end
+      it '市区町村が空だと保存できないこと' do
+        @order_address.municipality = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Municipality can't be blank")
+      end
 
-  it "番地が空では登録できないこと" do
-    @order_address.address = nil
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Address can't be blank")
-  end
+      it "番地が空では登録できないこと" do
+        @order_address.address = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Address can't be blank")
+      end
 
-  it "電話番号が空では登録できないこと" do
-    @order_address.phone_number = nil
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
-  end
+      it "電話番号が空では登録できないこと" do
+        @order_address.phone_number = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
+      end
 
-  it "郵便番号にハイフンがないと登録できないこと" do
-    @order_address.postal_code = 1234567
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Postal code is invalid")
-  end
+      it "郵便番号にハイフンがないと登録できないこと" do
+        @order_address.postal_code = 1234567
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Postal code is invalid")
+      end
 
-  it "電話番号にハイフンがあると登録できないこと" do
-    @order_address.phone_number = "090-1234-5678"
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Phone number is invalid")
-  end
+      it "電話番号にハイフンがあると登録できないこと" do
+        @order_address.phone_number = "090-1234-5678"
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
 
-  it "電話番号が12桁以上だと登録できないこと" do
-    @order_address.phone_number = "090123456789"
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Phone number is invalid")
-  end
+      it "電話番号が12桁以上だと登録できないこと" do
+        @order_address.phone_number = "090123456789"
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
 
-  it "area_idが1だと登録ができない" do
-    @order_address.area_id = 1
-    @order_address.valid?
-    expect(@order_address.errors.full_messages).to include("Area must be other than 1")
-  end
-
-  it "建物名が空でも購入ができること" do
-    @order_address.building_name = nil
-    expect(@order_address).to be_valid
+      it "area_idが1だと登録ができない" do
+        @order_address.area_id = 1
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Area must be other than 1")
+      end
+    end
   end
 end
