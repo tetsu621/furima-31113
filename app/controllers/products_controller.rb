@@ -24,14 +24,12 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    set_product
     if @products.order != nil || current_user.id != @products.user_id
       redirect_to root_path
     end 
   end
 
   def update
-    set_product
     if product.update(product_params)
       redirect_to root_path
     else
